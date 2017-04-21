@@ -7,6 +7,8 @@
 5. Alternative(re1 | re2) - the re that matches an alternative: re1 OR re2
 6. Closure(re*)           - the re that matches 0 or more of re
 """
+
+
 class Epsilon:
     """ the empty RE """
     def delta(self):
@@ -21,8 +23,10 @@ class Epsilon:
     def normalize(self):
         return self
 
+
 def make_str(str):
     pass
+
 
 def matches(regex, str):
     pass
