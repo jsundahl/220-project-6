@@ -24,6 +24,77 @@ class Epsilon:
         return self
 
 
+class NullSet:
+    """ the re that matches nothing """
+    def delta(self):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def derive(self, char):
+        pass
+
+    def normalize(self):
+        pass
+
+
+class Character:
+    def delta(self):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def derive(self, char):
+        pass
+
+    def normalize(self):
+        pass
+
+
+class Sequence:
+    def delta(self):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def derive(self, char):
+        pass
+
+    def normalize(self):
+        pass
+
+
+class Alternative:
+    def delta(self):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def derive(self, char):
+        pass
+
+    def normalize(self):
+        pass
+
+
+class Closure:
+    def delta(self):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def derive(self, char):
+        pass
+
+    def normalize(self):
+        pass
+
+
 def make_str(str):
     pass
 
