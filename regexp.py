@@ -100,7 +100,7 @@ class Alternation:
         return False
 
     def derive(self, char):
-        pass
+        return Alternation(self.re1.derive(char), self.re2.derive(char))
 
     def normalize(self):
         pass
@@ -118,7 +118,7 @@ class Closure:
         return True
 
     def derive(self, char):
-        pass
+        return Sequence(self.re.derive(char), self.re)
 
     def normalize(self):
         pass
