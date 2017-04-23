@@ -61,6 +61,11 @@ class Character:
 
 
 class Sequence:
+
+    def __init__(self, re1, re2):
+        self.re1 = re1
+        self.re2 = re2
+
     def delta(self):
         pass
 
@@ -74,7 +79,12 @@ class Sequence:
         pass
 
 
-class Alternative:
+class Alternation:
+
+    def __init__(self, re1, re2):
+        self.re1 = re1
+        self.re2 = re2
+
     def delta(self):
         pass
 
@@ -89,6 +99,10 @@ class Alternative:
 
 
 class Closure:
+
+    def __init__(self, re):
+        self.re = re
+
     def delta(self):
         pass
 
