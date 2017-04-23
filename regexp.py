@@ -57,7 +57,7 @@ class Character:
             return NullSet()
 
     def normalize(self):
-        return self
+        return self.char
 
 
 class Sequence:
@@ -81,7 +81,14 @@ class Sequence:
         return Alternation(seq1, seq2)
 
     def normalize(self):
-        pass
+        if isinstance(self.re1, NullSet) or isinstance(self.re2, NullSet):
+            return NullSet()
+        elif isinstance(self.re2, Epsilon):
+            return self.re1
+        elif isinstance(self.re1, Epsilon):
+            return self.re2
+        else:
+            return Sequence(self.re1.normalize(), self.re2.normalize())
 
 
 class Alternation:
