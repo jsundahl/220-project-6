@@ -137,7 +137,12 @@ class Closure:
 
 
 def make_str(str):
-    pass
+    if len(str) == 0:
+        return Epsilon()
+    elif len(str) == 1:
+        return Sequence(Character(str[0]), Epsilon())
+    else:
+        return Sequence(Character(str[0]), make_str(str[1:]))
 
 
 def matches(regex, str):
@@ -153,13 +158,16 @@ def matches(regex, str):
 if __name__ == '__main__':
     regex = Character('x')
     regex_2 = Sequence(Character('a'), Sequence(Character('b'), Sequence(Character('c'), Epsilon())))
+    regex_2_hopefully = make_str('abc')
 
     str_to_match = ''
     str_to_match_2 = 'axc'
 
     result = matches(regex, str_to_match)
     result_2 = matches(regex_2, str_to_match_2)
+    also_result_2 = matches(regex_2_hopefully, str_to_match_2)
 
     print(result)
     print(result_2)
+    print(also_result_2)
 
