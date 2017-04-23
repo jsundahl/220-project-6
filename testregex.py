@@ -1,177 +1,171 @@
-#import pytest
 from regexp import *
+import unittest
 
 
-# match empty make_str regex epsilon to make_str ''
-def test_epsilon1():
-    regex = Epsilon()
-    str_to_match = ''
-    res = matches(regex, str_to_match)
-    assert res == True
+class test_regex(unittest.TestCase):
 
+    # match empty make_str regex epsilon to make_str ''
+    def test_epsilon1(self):
+        regex = Epsilon()
+        str_to_match = ''
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# match empty make_str regex epsilon to make_str 'a'
-def test_epsilon2():
-    regex = Epsilon()
-    str_to_match = 'a'
-    res = matches(regex, str_to_match)
-    assert res == False
+    # match empty make_str regex epsilon to make_str 'a'
+    def test_epsilon2(self):
+        regex = Epsilon()
+        str_to_match = 'a'
+        res = matches(regex, str_to_match)
+        assert res == False
 
+    # match regex x to make_str 'x'
+    def test_Character1(self):
+        regex = Character('x')
+        str_to_match = 'x'
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# match regex x to make_str 'x'
-def test_Character1():
-    regex = Character('x')
-    str_to_match = 'x'
-    res = matches(regex, str_to_match)
-    assert res == True
+    # match regex x to make_str 'b'
+    def test_Character2(self):
+        regex = Character('x')
+        str_to_match = 'b'
+        res = matches(regex, str_to_match)
+        assert res == False
 
+    # match regex ab to make_str 'ab'
+    def test_seq1(self):
+        regex = Sequence(Character('a'), Character('b'))
+        str_to_match = 'ab'
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# match regex x to make_str 'b'
-def test_Character2():
-    regex = Character('x')
-    str_to_match = 'b'
-    res = matches(regex, str_to_match)
-    assert res == False
+    # match regex ab to make_str 'ac'
+    def test_seq2(self):
+        regex = Sequence(Character('a'), Character('b'))
+        str_to_match = 'ac'
+        res = matches(regex, str_to_match)
+        assert res == False
 
+    # make_str patterns
+    # match regex foo to make_str 'foo'
+    def test_str1(self):
+        regex = make_str('foo')
+        str_to_match = 'foo'
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# match regex ab to make_str 'ab'
-def test_seq1():
-    regex = Sequence(Character('a'), Character('b'))
-    str_to_match = 'ab'
-    res = matches(regex, str_to_match)
-    assert res == True
+    # match regex foo to make_str 'bar'
 
+    # match regex empty make_str to make_str ''
 
-# match regex ab to make_str 'ac'
-def test_seq2():
-    regex = Sequence(Character('a'), Character('b'))
-    str_to_match = 'ac'
-    res = matches(regex, str_to_match)
-    assert res == False
+    # match regex empty make_str to make_str 'd'
 
+    # match regex make_str abcabc to make_str 'abcabc'
 
-# make_str patterns
-# match regex foo to make_str 'foo'
-def test_str1():
-    regex = make_str('foo')
-    str_to_match = 'foo'
-    res = matches(regex, str_to_match)
-    assert res == True
+    # match regex make_str abcabc to make_str 'bcabc'
 
-# match regex foo to make_str 'bar'
+    # alternation
+    # regex (a|b) match "b"
 
-# match regex empty make_str to make_str ''
+    # regex (a|b) match "a"
 
-# match regex empty make_str to make_str 'd'
+    # regex (a|b) match "c"
 
-# match regex make_str abcabc to make_str 'abcabc'
+    # regex (a|b) match "aa"
+    def test_alt4(self):
+        regex = Alternation(Character('a'), Character('b'))
+        str_to_match = 'aa'
+        res = matches(regex, str_to_match)
+        assert res == False
 
-# match regex make_str abcabc to make_str 'bcabc'
+    # closure
+    # regex a* match "a"
+    def test_clos1(self):
+        regex = Closure(Character('a'))
+        str_to_match = 'a'
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# alternation
-# regex (a|b) match "b"
+    # regex a* match ""
 
-# regex (a|b) match "a"
+    # regex a* match "a"
 
-# regex (a|b) match "c"
+    # regex a* match "b"
 
+    # regex (a|b)* match ""
 
-# regex (a|b) match "aa"
-def test_alt4():
-    regex = Alternation(Character('a'), Character('b'))
-    str_to_match = 'aa'
-    res = matches(regex, str_to_match)
-    assert res == False
+    # regex (a|b)* match "a"
 
+    # regex (a|b)* match "b"
 
-# closure
-# regex a* match "a"
-def test_clos1():
-    regex = Closure(Character('a'))
-    str_to_match = 'a'
-    res = matches(regex, str_to_match)
-    assert res == True
+    # regex (a|b)* match "ab"
 
-# regex a* match ""
+    # regex (a|b)* match "ba"
 
-# regex a* match "a"
+    # regex (a|b)* match "baab"
 
-# regex a* match "b"
+    # regex (a|b)* match "aaaaaaaabbbbbbbb"
 
-# regex (a|b)* match ""
+    # regex (abc)* match ""
 
-# regex (a|b)* match "a"
+    # regex (abc)* match "ab"
 
-# regex (a|b)* match "b"
+    # regex (abc)* match "abc"
 
-# regex (a|b)* match "ab"
+    # regex (abc)* match "abca"
 
-# regex (a|b)* match "ba"
+    # regex (a*|b) match ""
 
-# regex (a|b)* match "baab"
+    # regex (a*|b) match "a"
 
-# regex (a|b)* match "aaaaaaaabbbbbbbb"
+    # regex (a*|b) match "b"
 
-# regex (abc)* match ""
+    # regex (a*|b) match "ab"
 
-# regex (abc)* match "ab"
+    # regex (a*|b) match "aaa"
 
-# regex (abc)* match "abc"
+    # regex (a*|b) match "aaa"
 
-# regex (abc)* match "abca"
+    # regex (a*|b) match "aaaabaaa"
 
-# regex (a*|b) match ""
+    # regex (abc)* match "abcbc"
 
-# regex (a*|b) match "a"
+    # regex (abc)* match "abcabcabcabcabc"
 
-# regex (a*|b) match "b"
+    # regex (abc|d)* match ""
 
-# regex (a*|b) match "ab"
+    # regex (abc|d)* match "d"
 
-# regex (a*|b) match "aaa"
+    # regex (abc|d)* match "dddabcd"
 
-# regex (a*|b) match "aaa"
+    # regex (abc|d|foo) match "d"
 
-# regex (a*|b) match "aaaabaaa"
+    # regex (abc|d|foo) match "abc"
 
-# regex (abc)* match "abcbc"
+    # regex (abc|d|foo) match "foo"
 
-# regex (abc)* match "abcabcabcabcabc"
+    # regex (a|b)*x(b|c)qg* match "xbq"
+    def test_regex31(self):
+        regex = Sequence(Closure(Alternation(Character('a'), Character('b'))),
+                       Sequence(Character('x'), Sequence(Alternation(Character('b'), Character('c')),
+                                                   Sequence(Character('q'),
+                                                      Closure(Character('g'))))))
+        str_to_match = 'xbq'
+        res = matches(regex, str_to_match)
+        assert res == True
 
-# regex (abc|d)* match ""
 
-# regex (abc|d)* match "d"
+    # regex (a|b)*x(b|c)qg* match "axbq"
 
-# regex (abc|d)* match "dddabcd"
+    # regex (a|b)*x(b|c)qg* match "xcq"
 
-# regex (abc|d|foo) match "d"
+    # regex (a|b)*x(b|c)qg* match "aaabbxbqggg"
 
-# regex (abc|d|foo) match "abc"
+    # regex (a|b)*x(b|c)qg* match "abcabcccc"
 
-# regex (abc|d|foo) match "foo"
+    # regex (a|b)*x(b|c)qg* match "abzcabcccc"
 
+    # regex (abc|c*)* match "abcabcccc"
 
-# regex (a|b)*x(b|c)qg* match "xbq"
-def test_regex31():
-    regex = Sequence(Closure(Alternation(Character('a'), Character('b'))),
-                   Sequence(Character('x'), Sequence(Alternation(Character('b'), Character('c')),
-                                               Sequence(Character('q'),
-                                                  Closure(Character('g'))))))
-    str_to_match = 'xbq'
-    res = matches(regex, str_to_match)
-    assert res == True
-
-
-# regex (a|b)*x(b|c)qg* match "axbq"
-
-# regex (a|b)*x(b|c)qg* match "xcq"
-
-# regex (a|b)*x(b|c)qg* match "aaabbxbqggg"
-
-# regex (a|b)*x(b|c)qg* match "abcabcccc"
-
-# regex (a|b)*x(b|c)qg* match "abzcabcccc"
-
-# regex (abc|c*)* match "abcabcccc"
-
-#    python -m pytest -v testregex.py
+if __name__ == '__main__':
+    unittest.main()
