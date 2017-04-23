@@ -133,7 +133,7 @@ class Closure:
         return Sequence(self.re.derive(char), self.re)
 
     def normalize(self):
-        pass
+        return self.re.normalize()
 
 
 def make_str(str):
