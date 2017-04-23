@@ -67,7 +67,10 @@ class Sequence:
         self.re2 = re2
 
     def delta(self):
-        pass
+        if isinstance(self.re1, Epsilon) and isinstance(self.re2, Epsilon):
+            return Epsilon()
+        else:
+            return NullSet()
 
     def is_empty(self):
         return False
@@ -86,7 +89,10 @@ class Alternation:
         self.re2 = re2
 
     def delta(self):
-        pass
+        if isinstance(self.re1, Epsilon) or isinstance(self.re2, Epsilon):
+            return Epsilon()
+        else:
+            return NullSet()
 
     def is_empty(self):
         return False
