@@ -76,7 +76,9 @@ class Sequence:
         return False
 
     def derive(self, char):
-        pass
+        seq1 = Sequence(self.re1.delta(), self.re2.derive(char))
+        seq2 = Sequence(self.re1.derive(char), self.re2)
+        return Alternation(seq1, seq2)
 
     def normalize(self):
         pass
