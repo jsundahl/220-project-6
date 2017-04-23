@@ -18,7 +18,7 @@ class Epsilon:
         return True
 
     def derive(self, char):
-        return null_set
+        return NullSet()
 
     def normalize(self):
         return self
@@ -27,24 +27,24 @@ class Epsilon:
 class NullSet:
     """ the re that matches nothing """
     def delta(self):
-        pass
+        return self
 
     def is_empty(self):
-        pass
+        return False
 
     def derive(self, char):
-        pass
+        return self
 
     def normalize(self):
-        pass
+        return self
 
 
 class Character:
     def delta(self):
-        pass
+        return NullSet()
 
     def is_empty(self):
-        pass
+        return False
 
     def derive(self, char):
         pass
@@ -58,7 +58,7 @@ class Sequence:
         pass
 
     def is_empty(self):
-        pass
+        return False
 
     def derive(self, char):
         pass
@@ -72,7 +72,7 @@ class Alternative:
         pass
 
     def is_empty(self):
-        pass
+        return False
 
     def derive(self, char):
         pass
@@ -86,7 +86,7 @@ class Closure:
         pass
 
     def is_empty(self):
-        pass
+        return True
 
     def derive(self, char):
         pass
