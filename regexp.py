@@ -84,9 +84,9 @@ class Sequence:
         if isinstance(self.re1, NullSet) or isinstance(self.re2, NullSet):
             return NullSet()
         elif isinstance(self.re2, Epsilon):
-            return self.re1
+            return self.re1.normalize()
         elif isinstance(self.re1, Epsilon):
-            return self.re2
+            return self.re2.normalize()
         else:
             return Sequence(self.re1.normalize(), self.re2.normalize())
 
@@ -110,7 +110,12 @@ class Alternation:
         return Alternation(self.re1.derive(char), self.re2.derive(char))
 
     def normalize(self):
-        pass
+        if isinstance(self.re1, NullSet):
+            return self.re2.normalize()
+        elif isinstance(self.re2, NullSet):
+            return self.re1.normalize()
+        else:
+            return Alternation(self.re1.normalize(), self.re2.normalize())
 
 
 class Closure:
