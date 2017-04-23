@@ -40,6 +40,10 @@ class NullSet:
 
 
 class Character:
+
+    def __init__(self, char):
+        self.char = char
+
     def delta(self):
         return NullSet()
 
@@ -47,7 +51,10 @@ class Character:
         return False
 
     def derive(self, char):
-        pass
+        if char == self.char:
+            return Epsilon()
+        else:
+            return NullSet()
 
     def normalize(self):
         pass
