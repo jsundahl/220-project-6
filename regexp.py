@@ -57,7 +57,7 @@ class Character:
             return NullSet()
 
     def normalize(self):
-        pass
+        return self
 
 
 class Sequence:
