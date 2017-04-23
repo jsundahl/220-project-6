@@ -110,7 +110,7 @@ class Closure:
         self.re = re
 
     def delta(self):
-        pass
+        return Epsilon()
 
     def is_empty(self):
         return True
