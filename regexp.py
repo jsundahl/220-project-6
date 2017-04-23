@@ -57,7 +57,7 @@ class Character:
             return NullSet()
 
     def normalize(self):
-        return self.char
+        return self
 
 
 class Sequence:
@@ -141,11 +141,25 @@ def make_str(str):
 
 
 def matches(regex, str):
-    pass
+    if len(str) == 0:
+        return regex.delta().is_empty()
+    else:
+        derived_normalized = regex.derive(str[0]).normalize()
+        if isinstance(derived_normalized, NullSet):
+            return False
+        else:
+            return matches(derived_normalized, str[1:])
 
 if __name__ == '__main__':
     regex = Character('x')
-    str_to_match = 'x'
+    regex_2 = Sequence(Character('a'), Sequence(Character('b'), Sequence(Character('c'), Epsilon())))
+
+    str_to_match = ''
+    str_to_match_2 = 'axc'
+
     result = matches(regex, str_to_match)
+    result_2 = matches(regex_2, str_to_match_2)
+
     print(result)
+    print(result_2)
 
